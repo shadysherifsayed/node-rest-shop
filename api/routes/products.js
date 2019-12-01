@@ -1,28 +1,20 @@
 const router = require('express').Router();
 
-
 const ProductController = require('../../controllers/ProductController');
 
-
-/**
- * @description Get All Products
- * @return JSON
- */
+const { productValidatationRules, validate } = require('../requests/Validators');
 
 router.get('/', ProductController.index);
 
-/**
- * @description Create a new product
- */
-router.post('/', ProductController.store);
+router.post('/', productValidatationRules(), validate, ProductController.store);
 
 router.delete('/', ProductController.destroyAll);
 
 router.get('/:product', ProductController.show);
 
-router.put('/:product', ProductController.update);
-
-router.patch('/:product', ProductController.update);
+['put', 'patch'].forEach(httpMethod => {
+    router[httpMethod]('/:product', productValidatationRules(), ProductController.update);
+});
 
 router.delete('/:product', ProductController.destroy);
 

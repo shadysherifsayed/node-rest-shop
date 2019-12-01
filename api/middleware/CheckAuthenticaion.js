@@ -2,10 +2,9 @@ const JWT = require('jsonwebtoken');
 
 const { secret_key: secretKey } = require('../../config/app');
 
-const checkAuth = function (request, response, next) {
+const checkAuth = function (request, _, next) {
 
     try {
-
         const bearerToken = request.headers.authorization;
 
         const [_, token] = bearerToken.split(" ");
@@ -15,11 +14,13 @@ const checkAuth = function (request, response, next) {
         request.user = decodedData;
 
         next();
-    } catch (error) {
+    } catch (_) {
 
-        response.status(401);
+        const error = new Error('Authentication Failed')
 
-        next(error);
+        error.status = 401;
+
+        next(error)
     }
 }
 

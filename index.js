@@ -23,14 +23,10 @@ app.use((request, response, next) => {
 // Handling other errors
 app.use((error, request, response, next) => {
 
-    response.status(error.status || 500);
-
-    response.json({
-        trace: error,
+    response.status(error.status || 500).json({
         error: error.message || 'Interval Server Error',
     })
 
-    next(error);
 });
 
 app.listen(config.port, () => console.log(`App is listening on port ${config.port}!`));

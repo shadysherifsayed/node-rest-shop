@@ -12,7 +12,7 @@ const options = {
     useCreateIndex: true
 };
 
-try {
+/* try {
     mongoose.connect(`mongodb://${username}:${password}@${host}:${port}/${database_name}`, options)
 } catch (error) {
     console.error(error)
@@ -25,7 +25,7 @@ const connection = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
 connection.on('error', () => console.error('MongoDB connection error:'));
 
-connection.on('connected', () => console.log('Mongoose is connected'));
+connection.on('connected', () => console.log('Mongoose is connected')); */
 
 module.exports = mongoose;
 

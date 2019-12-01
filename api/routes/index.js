@@ -4,7 +4,7 @@ const checkAuth = require('../middleware/CheckAuthenticaion');
 
 app.route('', (_, response) => response.send('Hello World'));
 
-app.use('/products', checkAuth, require('./products'));
+app.use('/products', require('./products'));
 
 app.use('/orders', require('./orders'));
 
